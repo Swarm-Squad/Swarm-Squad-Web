@@ -3,9 +3,24 @@
 import * as React from 'react';
 import * as SheetPrimitive from '@radix-ui/react-dialog';
 import { cva, type VariantProps } from 'class-variance-authority';
-import { X } from 'lucide-react';
 
 import { cn } from '@/lib/utils';
+
+function X({ className }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 16 16"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      className={className}
+      aria-hidden="true"
+    >
+      <path d="m4 4 8 8M12 4l-8 8" />
+    </svg>
+  );
+}
 
 const Sheet = SheetPrimitive.Root;
 

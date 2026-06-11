@@ -6,7 +6,7 @@
 
 ## 🧱 Tech Stack
 
-- **Next.js 15** (App Router) + **React 18** + **TypeScript**
+- **Next.js 15** (App Router) + **React 19** + **TypeScript**
 - **Tailwind CSS v3** with shadcn/ui primitives (Radix UI)
 - **Geist / Geist Mono** via `next/font`
 - **next-themes** — dark theme by default, light theme via the nav toggle

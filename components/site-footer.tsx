@@ -57,7 +57,7 @@ export function SiteFooter() {
           <div>
             <p className="font-mono text-sm font-semibold tracking-[0.25em]">SWARM SQUAD</p>
             <p className="mt-4 max-w-xs text-sm leading-relaxed text-muted-foreground">
-              An open source multi-agent simulation framework by Sang-Buster.
+              An open source multi-agent simulation framework.
             </p>
           </div>
 
