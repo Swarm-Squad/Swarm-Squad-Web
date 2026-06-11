@@ -47,7 +47,7 @@ export function Hero() {
             variant="outline"
             className="bg-transparent transition-transform active:scale-[0.98]"
           >
-            <Link href="/docs">Read the docs</Link>
+            <Link href="/docs">Read the Docs</Link>
           </Button>
         </div>
 
