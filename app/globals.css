@@ -2,70 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 255, 255, 255;
-  --background-rgb: 0, 0, 0;
-}
-
-body {
-  color: rgb(var(--foreground-rgb));
-  background: rgb(var(--background-rgb));
-  font-family:
-    'Inter',
-    -apple-system,
-    BlinkMacSystemFont,
-    'Segoe UI',
-    Roboto,
-    Oxygen,
-    Ubuntu,
-    Cantarell,
-    'Open Sans',
-    'Helvetica Neue',
-    sans-serif;
-}
-
-@keyframes flicker {
-  0%,
-  100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.95;
-  }
-}
-
-@keyframes noise {
-  0%,
-  100% {
-    transform: translate(0, 0);
-  }
-  10% {
-    transform: translate(-5%, -5%);
-  }
-  30% {
-    transform: translate(3%, -2%);
-  }
-  50% {
-    transform: translate(-2%, 6%);
-  }
-  70% {
-    transform: translate(5%, 0%);
-  }
-  90% {
-    transform: translate(-1%, 4%);
-  }
-}
-
-body {
-  font-family: Arial, Helvetica, sans-serif;
-}
-
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
-}
-
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -87,54 +23,28 @@ body {
     --border: 0 0% 89.8%;
     --input: 0 0% 89.8%;
     --ring: 0 0% 3.9%;
-    --chart-1: 12 76% 61%;
-    --chart-2: 173 58% 39%;
-    --chart-3: 197 37% 24%;
-    --chart-4: 43 74% 66%;
-    --chart-5: 27 87% 67%;
     --radius: 0.5rem;
-    --sidebar-background: 0 0% 98%;
-    --sidebar-foreground: 240 5.3% 26.1%;
-    --sidebar-primary: 240 5.9% 10%;
-    --sidebar-primary-foreground: 0 0% 98%;
-    --sidebar-accent: 240 4.8% 95.9%;
-    --sidebar-accent-foreground: 240 5.9% 10%;
-    --sidebar-border: 220 13% 91%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
   }
   .dark {
-    --background: 0 0% 3.9%;
-    --foreground: 0 0% 98%;
-    --card: 0 0% 3.9%;
-    --card-foreground: 0 0% 98%;
-    --popover: 0 0% 3.9%;
-    --popover-foreground: 0 0% 98%;
-    --primary: 0 0% 98%;
-    --primary-foreground: 0 0% 9%;
-    --secondary: 0 0% 14.9%;
-    --secondary-foreground: 0 0% 98%;
-    --muted: 0 0% 14.9%;
-    --muted-foreground: 0 0% 63.9%;
-    --accent: 0 0% 14.9%;
-    --accent-foreground: 0 0% 98%;
+    --background: 0 0% 4%;
+    --foreground: 0 0% 93%;
+    --card: 0 0% 4%;
+    --card-foreground: 0 0% 93%;
+    --popover: 0 0% 4%;
+    --popover-foreground: 0 0% 93%;
+    --primary: 0 0% 93%;
+    --primary-foreground: 0 0% 7%;
+    --secondary: 0 0% 11%;
+    --secondary-foreground: 0 0% 93%;
+    --muted: 0 0% 11%;
+    --muted-foreground: 0 0% 56%;
+    --accent: 0 0% 11%;
+    --accent-foreground: 0 0% 93%;
     --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 14.9%;
-    --input: 0 0% 14.9%;
-    --ring: 0 0% 83.1%;
-    --chart-1: 220 70% 50%;
-    --chart-2: 160 60% 45%;
-    --chart-3: 30 80% 55%;
-    --chart-4: 280 65% 60%;
-    --chart-5: 340 75% 55%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --destructive-foreground: 0 0% 93%;
+    --border: 0 0% 13%;
+    --input: 0 0% 13%;
+    --ring: 0 0% 70%;
   }
 }
 
@@ -142,7 +52,352 @@ body {
   * {
     @apply border-border;
   }
+  html {
+    scroll-behavior: smooth;
+  }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-sans antialiased;
+    /* clip (not hidden) keeps position: sticky working while preventing sideways scroll */
+    overflow-x: clip;
+  }
+  ::selection {
+    @apply bg-foreground text-background;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Drone swarm
+   Drones rise once from below the viewport (.drone-rise), then an inner
+   wrapper bobs forever (.drone-bob). Rotor blade groups oscillate scaleX to
+   read as spinning propellers (.drone-prop). Transform/opacity only.
+--------------------------------------------------------------------------- */
+
+@keyframes drone-rise {
+  from {
+    transform: translate3d(-50%, 110vh, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+.drone-rise {
+  animation: drone-rise 3.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+  will-change: transform;
+}
+
+@keyframes drone-bob {
+  0% {
+    transform: translate3d(0, 0, 0) rotate(0.4deg);
+  }
+  25% {
+    transform: translate3d(3px, -7px, 0) rotate(-0.5deg);
+  }
+  50% {
+    transform: translate3d(-2px, -12px, 0) rotate(0.3deg);
+  }
+  75% {
+    transform: translate3d(-4px, -5px, 0) rotate(-0.4deg);
+  }
+  100% {
+    transform: translate3d(0, 0, 0) rotate(0.4deg);
+  }
+}
+
+.drone-bob {
+  animation: drone-bob 5.6s ease-in-out infinite;
+}
+
+@keyframes prop-spin {
+  0%,
+  100% {
+    transform: scaleX(1);
+    opacity: 0.9;
+  }
+  50% {
+    transform: scaleX(0.16);
+    opacity: 0.35;
+  }
+}
+
+.drone-prop {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: prop-spin 0.18s ease-in-out infinite;
+}
+
+/* ---------------------------------------------------------------------------
+   Entrances
+--------------------------------------------------------------------------- */
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-enter {
+  animation: fade-up 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(14px);
+  transition:
+    opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@keyframes scroll-line {
+  0% {
+    transform: scaleY(0);
+    transform-origin: top;
+  }
+  45% {
+    transform: scaleY(1);
+    transform-origin: top;
+  }
+  55% {
+    transform: scaleY(1);
+    transform-origin: bottom;
+  }
+  100% {
+    transform: scaleY(0);
+    transform-origin: bottom;
+  }
+}
+
+.scroll-line {
+  animation: scroll-line 2.4s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+}
+
+/* Fixed full-screen film grain to break digital flatness. */
+.grain {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+}
+
+/* ---------------------------------------------------------------------------
+   Docs prose
+--------------------------------------------------------------------------- */
+
+.docs-prose {
+  color: hsl(var(--foreground) / 0.88);
+  font-size: 0.9575rem;
+  line-height: 1.75;
+  overflow-wrap: break-word;
+}
+
+.docs-prose > *:first-child {
+  margin-top: 0;
+}
+
+.docs-prose p {
+  margin: 1.1em 0;
+}
+
+.docs-prose .not-prose p {
+  margin: 0;
+}
+
+.docs-prose h2,
+.docs-prose h3,
+.docs-prose h4 {
+  color: hsl(var(--foreground));
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  scroll-margin-top: 7.5rem;
+  text-wrap: balance;
+}
+
+.docs-prose h2 {
+  font-size: 1.4rem;
+  margin: 2.75em 0 1em;
+  padding-top: 1.5em;
+  border-top: 1px solid hsl(var(--border) / 0.6);
+}
+
+.docs-prose h3 {
+  font-size: 1.15rem;
+  margin: 2em 0 0.75em;
+}
+
+.docs-prose h4 {
+  font-size: 1rem;
+  margin: 1.75em 0 0.5em;
+}
+
+.docs-prose a {
+  color: hsl(var(--foreground));
+  text-decoration: underline;
+  text-decoration-color: hsl(var(--border));
+  text-underline-offset: 4px;
+  transition: text-decoration-color 0.2s ease;
+}
+
+.docs-prose a:hover {
+  text-decoration-color: hsl(var(--foreground));
+}
+
+/* Headings are wrapped in anchor links — never underline them. */
+.docs-prose h2 a,
+.docs-prose h3 a,
+.docs-prose h4 a {
+  text-decoration: none;
+}
+
+.docs-prose ul,
+.docs-prose ol {
+  margin: 1.1em 0;
+  padding-left: 1.5rem;
+}
+
+.docs-prose ul {
+  list-style-type: disc;
+}
+
+.docs-prose ol {
+  list-style-type: decimal;
+}
+
+.docs-prose li {
+  margin: 0.4em 0;
+  padding-left: 0.25rem;
+}
+
+.docs-prose li::marker {
+  color: hsl(var(--muted-foreground));
+}
+
+.docs-prose li p {
+  margin: 0.4em 0;
+}
+
+.docs-prose ul ul,
+.docs-prose ol ol,
+.docs-prose ul ol,
+.docs-prose ol ul {
+  margin: 0.4em 0;
+}
+
+.docs-prose strong {
+  color: hsl(var(--foreground));
+  font-weight: 600;
+}
+
+.docs-prose hr {
+  margin: 3em 0;
+  border-color: hsl(var(--border) / 0.6);
+}
+
+.docs-prose blockquote {
+  margin: 1.5em 0;
+  border-left: 2px solid hsl(var(--border));
+  padding-left: 1.25rem;
+  color: hsl(var(--muted-foreground));
+}
+
+.docs-prose code {
+  font-family: theme('fontFamily.mono');
+  font-size: 0.84em;
+}
+
+.docs-prose :not(pre) > code {
+  background: hsl(var(--secondary) / 0.7);
+  border: 1px solid hsl(var(--border) / 0.6);
+  border-radius: 5px;
+  padding: 0.15em 0.4em;
+}
+
+.docs-prose figure[data-rehype-pretty-code-figure] {
+  margin: 1.5em 0;
+}
+
+.docs-prose pre {
+  overflow-x: auto;
+  background: hsl(var(--secondary) / 0.4);
+  border: 1px solid hsl(var(--border) / 0.6);
+  border-radius: calc(var(--radius) + 2px);
+  padding: 1rem 1.25rem;
+  font-size: 0.8125rem;
+  line-height: 1.7;
+}
+
+.docs-prose pre code {
+  display: grid;
+  background: transparent;
+  border: none;
+  padding: 0;
+  white-space: pre;
+}
+
+/* Shiki dual-theme token switching (min-light / min-dark). */
+.docs-prose code[data-theme],
+.docs-prose code[data-theme] span {
+  color: var(--shiki-light);
+}
+
+.dark .docs-prose code[data-theme],
+.dark .docs-prose code[data-theme] span {
+  color: var(--shiki-dark);
+}
+
+.docs-prose table {
+  width: 100%;
+  margin: 1.5em 0;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+}
+
+.docs-prose th {
+  text-align: left;
+  font-weight: 600;
+  padding: 0.6rem 0.75rem;
+  border-bottom: 1px solid hsl(var(--border));
+}
+
+.docs-prose td {
+  padding: 0.6rem 0.75rem;
+  border-bottom: 1px solid hsl(var(--border) / 0.5);
+}
+
+.docs-prose img {
+  border-radius: var(--radius);
+  border: 1px solid hsl(var(--border) / 0.6);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .drone-rise,
+  .drone-bob,
+  .drone-prop,
+  .hero-enter,
+  .scroll-line {
+    animation: none;
+  }
+  .hero-enter {
+    opacity: 1;
+  }
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
   }
 }

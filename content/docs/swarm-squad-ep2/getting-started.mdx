@@ -1,0 +1,315 @@
+---
+title: Getting started with Episode II
+description: Install The Digital Dialogue and launch the real-time human-swarm communication stack.
+---
+
+Welcome to Swarm Squad Episode II: The Digital Dialogue, a modern multi-agent system framework featuring real-time communication, enhanced user interfaces, and advanced chatbot capabilities for human-AI collaboration.
+
+## What is Episode II?
+
+Swarm Squad Episode II is an advanced simulation framework that extends the Swarm Squad ecosystem with modern web technologies and real-time communication capabilities. The framework features:
+
+- **Real-time communication:** WebSocket-based messaging for instant agent interactions
+- **Modern web interface:** Built with Next.js, TypeScript, and Tailwind CSS
+- **Enhanced chatbot integration:** AI-powered chat capabilities
+- **Full-stack architecture:** Separate frontend and backend for scalability
+- **Interactive dashboards:** Real-time visualization and monitoring
+- **Live updates:** Real-time data synchronization across all components
+- **User-centric design:** Intuitive interface for a smooth user experience
+- **Developer-friendly:** Comprehensive CLI tools and development utilities
+
+## Quick start
+
+For most users, getting started with Episode II is as simple as:
+
+```bash
+# Install Swarm Squad Episode II
+uv pip install swarm-squad-ep2
+
+# Launch the application
+swarm-squad-ep2
+swarm-squad-ep2 --help
+```
+
+That's it. The application will start both the backend and frontend, and you can begin exploring modern multi-agent systems.
+
+## Prerequisites
+
+For basic usage, you only need:
+
+- **[uv](https://docs.astral.sh/uv/getting-started/installation/)**: For package installation and management (recommended)
+
+### Installing uv
+
+```bash
+# macOS/Linux
+curl -LsSf https://astral.sh/uv/install.sh | sh
+
+# Windows
+powershell -c "irm https://astral.sh/uv/install.ps1 | iex"
+```
+
+## Installation
+
+### Option 1: Install from PyPI (recommended)
+
+The simplest way to install Episode II is directly from PyPI:
+
+```bash
+# Install the package using uv
+uv pip install swarm-squad-ep2
+```
+
+### Option 2: Development installation
+
+For contributors, developers, or if you want to modify the framework:
+
+**Additional prerequisites for development:**
+
+- **Node.js v18 or higher**: For the frontend application (recommended: install via [nvm](https://github.com/nvm-sh/nvm))
+- **[pnpm](https://pnpm.io/installation)**: For Node.js frontend dependencies (recommended)
+- **[git](https://git-scm.com/downloads)**: For cloning the repository
+
+#### Install Node.js and pnpm for development
+
+```bash
+# Install nvm (Node Version Manager)
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
+
+# Install and use Node.js 18
+nvm install 18
+nvm use 18
+
+# Install pnpm globally
+npm install -g pnpm
+```
+
+#### Development setup
+
+```bash
+# Clone the repository
+git clone https://github.com/Sang-Buster/Swarm-Squad-Ep2
+cd Swarm-Squad-Ep2
+
+# Create and activate virtual environment
+uv venv --python 3.10
+source .venv/bin/activate  # On Linux/macOS
+# Or: .venv\Scripts\activate  # On Windows
+
+# Install in development mode
+uv pip install -e .
+```
+
+## Running Episode II
+
+### Using the CLI interface
+
+After installation, you can use the comprehensive CLI interface:
+
+```bash
+# Show all available commands
+swarm-squad-ep2 --help
+```
+
+### Available commands
+
+#### Launch the complete application
+
+```bash
+# Launch both backend and frontend together
+swarm-squad-ep2 launch
+```
+
+#### Run components individually
+
+```bash
+# Run FastAPI backend server (default port 8000)
+swarm-squad-ep2 fastapi
+
+# Run FastAPI backend on custom port
+swarm-squad-ep2 fastapi --port 8080
+
+# Run Next.js frontend (default port 3000)
+swarm-squad-ep2 webui
+
+# Run frontend on custom port
+swarm-squad-ep2 webui --port 3001
+```
+
+#### Development and simulation commands
+
+```bash
+# Install frontend dependencies (development only)
+swarm-squad-ep2 install
+
+# Build frontend for production (development only)
+swarm-squad-ep2 build
+
+# Run vehicle simulation components
+swarm-squad-ep2 sim
+
+# Run with matplotlib visualization
+swarm-squad-ep2 sim visualize
+
+# Run WebSocket test client
+swarm-squad-ep2 sim test
+```
+
+## Project structure
+
+Understanding the Episode II file structure will help you navigate and extend the framework:
+
+```
+Swarm-Squad-Ep2
+├── lib/                                # Project media/assets
+│   ├── banner.png
+│   └── screenshot.png
+├── src/
+│   └── swarm_squad_ep2/                # Python package
+│       ├── api/                        # FastAPI backend
+│       │   ├── routers/                # Route handlers (REST + WS)
+│       │   │   ├── batch.py            # Batch job endpoints
+│       │   │   ├── llms.py             # LLM-facing routes
+│       │   │   ├── realtime.py         # WebSocket / SSE endpoints
+│       │   │   ├── veh2llm.py          # Vehicle-to-LLM bridge routes
+│       │   │   └── vehicles.py         # Vehicle CRUD/telemetry routes
+│       │   ├── static/                 # Static files
+│       │   ├── templates/              # Jinja2 templates
+│       │   ├── database.py             # DB session/engine + init
+│       │   ├── main.py                 # FastAPI app entrypoint
+│       │   ├── models.py               # Pydantic/ORM models
+│       │   └── utils.py                # Shared backend helpers
+│       ├── cli/                        # Command-line tools
+│       │   ├── build.py                # Build/package helpers
+│       │   ├── fastapi.py              # Start API server CLI
+│       │   ├── install.py              # Dev/install helpers
+│       │   ├── launch.py               # One-shot launcher
+│       │   ├── sim.py                  # Run simulations via CLI
+│       │   └── webui.py                # Launch frontend from CLI
+│       ├── scripts/                    # Standalone scripts
+│       │   ├── run_simulation.py       # Scripted sim runner
+│       │   ├── simulator.py            # Simulation engine
+│       │   ├── test_client.py          # Quick API/WS tests
+│       │   └── visualize_simulation.py # Simple plotting tools
+│       ├── web/                        # Next.js frontend
+│       │   ├── app/                    # App Router entry
+│       │   ├── components/             # React components (incl. ui/)
+│       │   ├── hooks/                  # Frontend hooks
+│       │   ├── lib/                    # Frontend utils
+│       │   └── package.json
+│       └── main.py                     # Package-level entry
+├── pyproject.toml                      # Python project config
+└── uv.lock                             # Python deps lock
+```
+
+## Key components
+
+Episode II includes several modern components for an enhanced user experience:
+
+### Frontend architecture
+
+- **Next.js framework:** Server-side rendering and modern React features
+- **TypeScript:** Type-safe development for better code quality
+- **Tailwind CSS:** Utility-first styling for responsive design
+- **Real-time communication:** WebSocket integration for live updates
+
+### Backend architecture
+
+- **FastAPI:** High-performance Python web framework
+- **WebSocket support:** Real-time bidirectional communication
+- **RESTful API:** Standard HTTP endpoints for data operations
+- **Integration layer:** Connects to the Swarm Squad simulation engine
+
+### CLI tools
+
+The CLI provides comprehensive commands for different workflows:
+
+- **`launch`**: Complete application startup
+- **`fastapi`**: Backend server management
+- **`webui`**: Frontend development server
+- **`sim`**: Vehicle simulation and testing
+- **`install`**: Development dependency management
+- **`build`**: Production build process
+
+## First application launch
+
+Once you have Episode II installed, you can launch your first session:
+
+1. **Launch the application:**
+
+   ```bash
+   swarm-squad-ep2 launch
+   ```
+
+2. **Access the web interface:** Open your browser and navigate to `http://localhost:3000`
+
+3. **Explore the features:**
+   - User authentication and account management
+   - Real-time chat interface
+   - Interactive dashboards
+   - Live data visualization
+   - WebSocket communication status
+
+4. **Test the API:** The backend API documentation is available at `http://localhost:8000/docs`
+
+## Vehicle simulation
+
+Episode II includes vehicle simulation capabilities:
+
+```bash
+# Run basic vehicle simulation
+swarm-squad-ep2 sim
+
+# Run simulation with matplotlib visualization
+swarm-squad-ep2 sim visualize
+
+# Test WebSocket connections
+swarm-squad-ep2 sim test
+```
+
+## Configuration
+
+The application behavior can be configured through various methods:
+
+- **Environment variables:** Set in `.env` files for both frontend and backend
+- **Configuration files:** Modify settings in the respective config files
+- **CLI parameters:** Pass options like `--port` to customize server settings
+- **Runtime settings:** Adjust settings through the web interface
+
+## Next steps
+
+Now that you have Episode II installed and running, explore these areas:
+
+1. **[Architecture](/docs/swarm-squad-ep2/architecture)**: Understand the full-stack system design
+2. **[Configuration](/docs/swarm-squad-ep2/configuration)**: Learn about customization options and settings
+3. **[Demo](/docs/swarm-squad-ep2/demo)**: Try out example scenarios and use cases
+4. **API documentation**: Explore the backend API at `http://localhost:8000/docs`
+5. **Community**: Join the Swarm Squad community for support and collaboration
+
+## Troubleshooting
+
+If you encounter issues during installation or setup:
+
+### Common issues
+
+- **Python version**: Ensure you're using Python 3.10 or higher
+- **Port conflicts**: Check if ports 3000 and 8000 are available, or use custom ports
+- **Dependencies**: Run `uv pip install -e .` again if you encounter import errors
+- **WebSocket issues**: Ensure WebSocket connections are not blocked by firewalls
+
+### Getting help
+
+- Check the error messages for specific guidance
+- Review the logs in the terminal output
+- Ensure all prerequisites are correctly installed
+- Use `swarm-squad-ep2 --help` to see all available commands
+- Visit the project's [GitHub repository](https://github.com/Swarm-Squad/Swarm-Squad-Ep2) for issue tracking and community support
+
+### Development issues
+
+- Use `swarm-squad-ep2 install` to ensure frontend dependencies are installed
+- Use `swarm-squad-ep2 build` to create production builds
+- Verify that both frontend and backend are running properly
+- Check the browser console for frontend errors
+
+With Episode II properly installed and configured, you're ready to explore modern multi-agent systems with real-time communication.

@@ -1,0 +1,50 @@
+---
+title: Episode II — The Digital Dialogue
+description: Real-time communication between human operators and agent systems, with a modern web interface.
+---
+
+Swarm Squad Episode II: The Digital Dialogue expands the Swarm Squad ecosystem by focusing on real-time communication capabilities and user interaction. While the previous modules concentrated on agent simulation and formation control, Episode II shifts focus to the interface between human operators and agent systems, creating a more interactive and responsive platform.
+
+The development of this module was motivated by the recognition that effective human-swarm interaction is crucial for practical deployment of multi-agent systems. In real-world scenarios, autonomous agents must not only coordinate with each other but also receive guidance from and provide feedback to human operators — creating a need for robust communication channels and intuitive interfaces.
+
+## Core focus areas
+
+Episode II addresses several key aspects of multi-agent system communication:
+
+- **Real-time communication:** WebSocket-based communication for instant interaction between users and agent systems
+- **User management:** Authentication, permissions, and profile management for secure access to agent control
+- **Chat interface:** Intuitive chat room functionality for text-based interaction with agent systems
+- **LLM integration:** Enhanced integration with Ollama and other LLM providers for more sophisticated agent responses
+- **Web-based interface:** Modern Next.js frontend providing accessible, responsive control across devices
+- **API-driven architecture:** Clean separation between frontend and backend through a well-defined FastAPI interface
+
+These focus areas combine to create a system that bridges the gap between autonomous agent simulation and practical human-machine interaction.
+
+## Technical implementation
+
+Episode II represents a significant technical evolution in the project, adopting a modern web stack while maintaining compatibility with the existing Python-based simulation engines:
+
+- **Frontend:** Built with Next.js, TypeScript, and Tailwind CSS for a responsive and accessible user interface
+- **Backend:** Implemented with FastAPI to provide high-performance API endpoints and WebSocket support
+- **Communication:** Real-time messaging through the WebSocket protocol for low-latency interaction
+- **Authentication:** Secure user management system with role-based access control
+- **Integration:** Seamless connection to the existing Swarm Squad simulation capabilities
+
+This architecture provides a flexible foundation for developing sophisticated human-swarm interaction systems, with clear separation of concerns and modern development practices.
+
+## Applications
+
+The capabilities introduced in Episode II enable several important application scenarios:
+
+- **Remote monitoring and control:** Observe and direct swarm behavior from anywhere with internet access
+- **Collaborative operations:** Multiple operators coordinating to manage complex swarm missions
+- **Training and simulation:** Interactive scenarios for training operators in swarm management
+- **Data collection and analysis:** Real-time feedback and logging of operator decisions and swarm responses
+- **Hybrid autonomy:** Balancing automated agent behavior with human guidance and intervention
+
+These applications demonstrate the practical value of combining robust simulation capabilities with effective human-machine interfaces, creating a platform that bridges research and real-world deployment.
+
+## Next steps
+
+- [Getting started](/docs/swarm-squad-ep2/getting-started) — install and launch the full stack
+- [Gallery](/docs/gallery) — see every project in action

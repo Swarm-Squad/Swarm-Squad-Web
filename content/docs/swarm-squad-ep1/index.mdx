@@ -1,0 +1,51 @@
+---
+title: Episode I — Surviving the Jam
+description: A hybrid control architecture combining behavior-based formation control with LLM-powered decision making for autonomous multi-agent systems.
+---
+
+Swarm Squad Episode I represents a significant evolution in the Swarm Squad project, focusing on the critical challenge of maintaining formation control and mission objectives in environments with communication constraints. This module implements a hybrid control architecture that combines traditional behavior-based formation control techniques with the strategic guidance of Large Language Models (LLMs).
+
+The development of this module was motivated by real-world challenges in deploying multi-agent systems in hostile or communication-constrained environments. In many practical applications, from search and rescue to reconnaissance missions, swarms of autonomous agents must maintain effective coordination even when faced with jamming, obstacles, or other communication disruptions.
+
+## Research evolution
+
+Swarm Squad Episode I builds upon foundational research in formation control and swarm intelligence, combining established techniques with LLM technologies:
+
+- **Low-level controller:** A behavior-based control system for vehicle agents, incorporating communication-aware formation control that can adapt to varying communication conditions.
+
+- **High-level controller:** LLM agents process simulation data to provide strategic guidance, allowing the swarm to adapt to changing conditions and maintain mission objectives despite communication challenges.
+
+- **Integrated architecture:** The hybrid approach combines the reactive capabilities of behavior-based control with the planning and strategic reasoning capabilities of LLMs, creating a robust system that can handle complex environments.
+
+This represents a novel approach to communication-constrained coordination in multi-agent systems, offering new insights into how traditional control techniques can be enhanced through the integration of AI technologies.
+
+## Key capabilities
+
+Swarm Squad Episode I introduces several key capabilities:
+
+- **Communication-aware formation control:** Maintain formation integrity even in the presence of communication disruption or jamming
+- **Adaptive behavior models:** Dynamically adjust agent behavior based on environmental conditions and mission objectives
+- **LLM-guided decision making:** Leverage large language models for strategic guidance in complex mission scenarios
+- **Obstacle avoidance:** Navigate complex environments while maintaining formation and mission progress
+- **Resilience to communication failures:** Gracefully handle partial or complete communication loss between agents
+- **Performance metrics:** Comprehensive analysis tools for evaluating formation stability, mission success, and resilience
+
+## Technical implementation
+
+The module is implemented as an extension to the base Swarm Squad framework, with specialized components for formation control and LLM integration:
+
+- **Controller system:** Modular controllers including `base_controller`, `behavior_controller`, `formation_controller`, and `llm_controller`
+- **Swarm state management:** Comprehensive tracking and management of swarm formation state
+- **Visualization tools:** Enhanced visualization capabilities for understanding formation dynamics
+- **LLM integration:** Interfaces for connecting with Ollama and other LLM providers
+
+This technical architecture gives researchers a flexible platform for exploring the intersection of traditional control techniques and modern AI approaches in multi-agent systems.
+
+## Supplementary materials
+
+The development of Swarm Squad Episode I has been documented in academic papers and presentations that provide detailed insights into the theoretical foundations and practical implementation of the system. These materials offer valuable context for researchers interested in the technical details of the approach.
+
+## Next steps
+
+- [Getting started](/docs/swarm-squad-ep1/getting-started) — install and run your first jamming scenario
+- [Demo](/docs/swarm-squad-ep1/demo) — watch the swarm survive the jam
