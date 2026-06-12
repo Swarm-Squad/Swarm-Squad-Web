@@ -35,11 +35,6 @@ jobs:
           node-version: '22'
           cache: 'pnpm'
 
-      - name: Setup Pages
-        uses: actions/configure-pages@v5
-        with:
-          static_site_generator: next
-
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
@@ -48,6 +43,13 @@ jobs:
 
       - name: Type check
         run: pnpm exec tsc --noEmit
+
+      # configure-pages can rewrite next.config.* for Pages; run it after lint/typecheck
+      # so formatting checks run against repo source, not action-modified files.
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+        with:
+          static_site_generator: next
 
       - name: Build with Next.js
         run: pnpm run build
