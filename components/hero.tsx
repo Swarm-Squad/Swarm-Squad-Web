@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { DroneSwarm } from '@/components/drone-swarm';
@@ -15,6 +16,23 @@ export function Hero() {
         aria-hidden
         className="absolute inset-0 bg-[radial-gradient(ellipse_55%_45%_at_50%_-12%,hsl(var(--foreground)/0.07),transparent_70%)]"
       />
+      {/* Dimmed brand watermark */}
+      <div aria-hidden className="pointer-events-none absolute inset-0 z-[2]">
+        <Image
+          src="/favicon.svg"
+          alt=""
+          width={208}
+          height={208}
+          className="absolute -right-8 top-[25%] h-28 w-28 opacity-[0.12] dark:invert sm:right-[7%] sm:top-[30%] sm:h-40 sm:w-40 sm:opacity-[0.09] lg:h-52 lg:w-52"
+        />
+        <Image
+          src="/favicon.svg"
+          alt=""
+          width={112}
+          height={112}
+          className="absolute bottom-[13%] left-[9%] hidden h-20 w-20 opacity-[0.07] dark:invert md:block"
+        />
+      </div>
 
       <DroneSwarm />
 
