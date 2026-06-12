@@ -34,16 +34,14 @@ export function SiteNav() {
           href="/"
           className="inline-flex items-center gap-2.5 rounded-sm font-mono text-xs font-semibold tracking-[0.25em] transition-colors hover:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring sm:text-sm"
         >
-          <span className="inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-[6px] border border-foreground/30 bg-background/80 sm:h-[22px] sm:w-[22px]">
-            <Image
-              src="/favicon.svg"
-              alt=""
-              aria-hidden
-              width={20}
-              height={20}
-              className="h-[14px] w-[14px] shrink-0 contrast-125 dark:invert sm:h-[15px] sm:w-[15px]"
-            />
-          </span>
+          <Image
+            src="/favicon.svg"
+            alt=""
+            aria-hidden
+            width={32}
+            height={32}
+            className="h-6 w-6 shrink-0 contrast-125 dark:invert"
+          />
           SWARM SQUAD
         </Link>
 
